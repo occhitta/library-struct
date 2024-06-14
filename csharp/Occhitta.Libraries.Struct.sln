@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "source", "source", "{D20141C2-3622-4E51-B48F-F4E4EF1CC7A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occhitta.Libraries.Struct.Code", "source\code\Occhitta.Libraries.Struct.Code.csproj", "{36B16733-4AF7-4B8A-A494-F868B0E5427D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Occhitta.Libraries.Struct.Test", "source\test\Occhitta.Libraries.Struct.Test.csproj", "{E49B7581-D00F-45FD-9725-50DBC5729713}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36B16733-4AF7-4B8A-A494-F868B0E5427D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B16733-4AF7-4B8A-A494-F868B0E5427D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B16733-4AF7-4B8A-A494-F868B0E5427D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B16733-4AF7-4B8A-A494-F868B0E5427D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49B7581-D00F-45FD-9725-50DBC5729713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49B7581-D00F-45FD-9725-50DBC5729713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49B7581-D00F-45FD-9725-50DBC5729713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49B7581-D00F-45FD-9725-50DBC5729713}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36B16733-4AF7-4B8A-A494-F868B0E5427D} = {D20141C2-3622-4E51-B48F-F4E4EF1CC7A1}
+		{E49B7581-D00F-45FD-9725-50DBC5729713} = {D20141C2-3622-4E51-B48F-F4E4EF1CC7A1}
 	EndGlobalSection
 EndGlobal

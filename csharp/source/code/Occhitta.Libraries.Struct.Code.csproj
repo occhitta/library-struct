@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 基本設定 -->
+  <PropertyGroup>
+    <!-- アセンブリ名 -->
+    <AssemblyName>Occhitta.Libraries.Struct</AssemblyName>
+    <!-- 実行環境設定 -->
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- 管理番号設定 -->
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <!-- 記述制約設定 -->
+    <ImplicitUsings>disable</ImplicitUsings><!-- 左記は「GlobalCode.cs」にて定義する為、「disable」とする -->
+    <Nullable>enable</Nullable>
+    <!-- 生成整合設定(決定論的ビルド) -->
+    <!-- 単体テストにて検証が行われなくなる為、コメントアウト(公開時にのみ有効化？)
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../'))</RepoRoot>
+    <PathMap>$(RepoRoot)=Source.Code</PathMap>
+    -->
+    <!-- 公開内容設定(NuGet固有設定) -->
+    <PackageId>Occhitta.Libraries.Struct</PackageId>
+    <Title>Occhitta's Struct Library</Title>
+    <Description>構造ライブラリ(C#バージョン)</Description>
+    <PackageProjectUrl>https://github.com/occhitta/library-struct</PackageProjectUrl>
+    <Authors>Occhitta</Authors>
+    <Copyright>None.</Copyright>
+    <!-- 公開文書設定 -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>bin/Occhitta.Library.Struct.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <!-- 参照設定(検証参照) -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Occhitta.Libraries.Struct.Test</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <!-- 参照設定(外部参照) -->
+  <!-- 参照設定(内部参照) -->
+</Project>
