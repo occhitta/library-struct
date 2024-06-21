@@ -3,9 +3,7 @@ namespace Occhitta.Libraries.Stream;
 /// <summary>
 /// バイナリ読込処理インターフェースです。
 /// </summary>
-#pragma warning disable IDE1006
 public interface BinaryLightReader : IDisposable {
-#pragma warning restore IDE1006
 	/// <summary>
 	/// 後続情報を読込みます。
 	/// <para>終端に達した場合、負数を返却します</para>

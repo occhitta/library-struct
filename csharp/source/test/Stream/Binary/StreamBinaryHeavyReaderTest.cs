@@ -116,7 +116,7 @@ public class StreamBinaryHeavyReaderTest {
 		using var stream = new MemoryStream([0x00, 0x01]);
 		using var source = new StreamBinaryHeavyReader(stream);
 		((IDisposable)source).Dispose();
-		var result = Assert.ThrowsAsync<ObjectDisposedException>(source.Read);
+		var result = Assert.ThrowsAsync<ObjectDisposedException>(() => source.Read());
 		Assert.Multiple(() => {
 			Assert.That(result.Message,        Is.EqualTo("Cannot access a disposed object.\r\nObject name: 'Occhitta.Libraries.Stream.Binary.StreamBinaryHeavyReader'."));
 			Assert.That(result.ObjectName,     Is.EqualTo("Occhitta.Libraries.Stream.Binary.StreamBinaryHeavyReader"));
