@@ -1,5 +1,3 @@
-using Newtonsoft.Json.Serialization;
-
 namespace Occhitta.Libraries.Stream;
 
 /// <summary>
