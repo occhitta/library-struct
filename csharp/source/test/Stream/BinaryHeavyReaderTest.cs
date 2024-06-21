@@ -14,7 +14,7 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	/// <summary>
 	/// 要素配列
 	/// </summary>
-	private byte[]? values;
+	private byte[]? source;
 	#endregion メンバー変数定義
 
 	#region プロパティー定義
@@ -22,7 +22,7 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	/// 要素配列を取得します。
 	/// </summary>
 	/// <value>要素配列</value>
-	private byte[] Values => this.values ?? throw new ObjectDisposedException(GetType().FullName);
+	private byte[] Source => this.source ?? throw new ObjectDisposedException(GetType().FullName);
 	#endregion プロパティー定義
 
 	#region 破棄メソッド定義
@@ -31,26 +31,26 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	/// </summary>
 	void IDisposable.Dispose() {
 		this.offset = default;
-		this.values = default;
+		this.source = default;
 		GC.SuppressFinalize(this);
 	}
 	#endregion 破棄メソッド定義
 
-	#region 内部メソッド定義:ToBinary
+	#region 内部メソッド定義:ToSource
 	/// <summary>
 	/// 要素配列へ変換します。
 	/// </summary>
 	/// <param name="start">開始番号</param>
 	/// <param name="count">要素個数</param>
 	/// <returns>要素配列</returns>
-	private static byte[] ToBinary(byte start, int count) {
+	private static byte[] ToSource(byte start, int count) {
 		var result = new byte[count];
 		for (var index = 0; index < count; index ++) {
 			result[index] = start ++;
 		}
 		return result;
 	}
-	#endregion 内部メソッド定義:ToBinary
+	#endregion 内部メソッド定義:ToSource
 
 	#region 内部メソッド定義:ToString
 	/// <summary>
@@ -92,8 +92,8 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	/// <param name="cancel">取消処理</param>
 	/// <returns>後続情報</returns>
 	private async Task<int> ReadData(CancellationToken cancel) {
-		var values = Values;
-		var result = this.offset < values.Length? values[this.offset ++]: -1;
+		var source = Source;
+		var result = this.offset < source.Length? source[this.offset ++]: -1;
 		return await Task.Run(() => result);
 	}
 	#endregion 内部メソッド定義:ReadData
@@ -140,9 +140,9 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	/// </summary>
 	[TestCase(0x00, 256, 16,  16)]
 	public async Task Test(byte startValue, int binarySize, int bufferSize, int expectSize) {
-		this.values = ToBinary(startValue, binarySize);
-		Assert.That(this.values, Has.Length.EqualTo(binarySize));
-		var expectText = ToString(ToBinary(startValue, expectSize));
+		this.source = ToSource(startValue, binarySize);
+		Assert.That(this.source, Has.Length.EqualTo(binarySize));
+		var expectText = ToString(ToSource(startValue, expectSize));
 		var bufferData = new byte[bufferSize];
 		var actualSize = await Test(this, bufferData);
 		var actualText = ToString(bufferData, 0, actualSize);
