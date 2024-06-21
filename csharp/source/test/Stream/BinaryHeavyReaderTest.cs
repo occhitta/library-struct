@@ -130,14 +130,20 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 
 	#region 検証メソッド定義:Test
 	/// <summary>
-	/// <see cref="BinaryHeavyReader.Read(byte[])" />を実行します。
+	/// <see cref="BinaryHeavyReader.Read(byte[], CancellationToken))" />を実行します。
 	/// </summary>
 	/// <param name="source">検証情報</param>
+	/// <param name="buffer">保存配列</param>
+	/// <returns>保存した個数を返却</returns>
 	private static async Task<int> Test(BinaryHeavyReader source, byte[] buffer) =>
 		await source.Read(buffer);
 	/// <summary>
-	/// <see cref="BinaryHeavyReader.Read(byte[])" />を検証します。
+	/// <see cref="BinaryHeavyReader.Read(byte[], CancellationToken)" />を検証します。
 	/// </summary>
+	/// <param name="startValue">開始情報</param>
+	/// <param name="binarySize">保持個数</param>
+	/// <param name="bufferSize">保存個数</param>
+	/// <param name="expectSize">想定個数</param>
 	[TestCase(0x00, 256, 16,  16)]
 	public async Task Test(byte startValue, int binarySize, int bufferSize, int expectSize) {
 		this.source = ToSource(startValue, binarySize);
