@@ -94,7 +94,7 @@ public class BinaryHeavyReaderTest : BinaryHeavyReader {
 	private async Task<int> ReadData(CancellationToken cancel) {
 		var source = Source;
 		var result = this.offset < source.Length? source[this.offset ++]: -1;
-		return await Task.Run(() => result);
+		return await Task.Run(() => result, cancel);
 	}
 	#endregion 内部メソッド定義:ReadData
 
