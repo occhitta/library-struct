@@ -5,7 +5,7 @@ namespace Occhitta.Libraries.Stream.Binary;
 /// </summary>
 /// <param name="source">要素配列</param>
 /// <exception cref="ArgumentNullException"><paramref name="source" />に<c>Null</c>が指定された場合</exception>
-public sealed class SimpleBinaryLightReader(byte[] source) : BinaryLightReader {
+public sealed class MemoryBinaryLightReader(byte[] source) : BinaryLightReader {
 	#region メンバー変数定義
 	/// <summary>
 	/// 読込位置
