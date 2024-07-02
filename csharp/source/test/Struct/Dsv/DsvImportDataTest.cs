@@ -37,12 +37,14 @@ public sealed class DsvImportDataTest {
 	/// <param name="source">引数名称</param>
 	private static void FailureCode(ArgumentNullException actual, string source) {
 		Assert.Multiple(() => {
-			Assert.That(actual.Data,           Is.Empty, $"{nameof(ArgumentException)}#{nameof(ArgumentException.Data)}");
-			Assert.That(actual.HelpLink,       Is.Null,  $"{nameof(ArgumentException)}#{nameof(ArgumentException.HelpLink)}");
-			Assert.That(actual.HResult,        Is.EqualTo(-2147467261));
-			Assert.That(actual.InnerException, Is.Null);
-			Assert.That(actual.Message,        Is.EqualTo($"Value cannot be null. (Parameter '{source}')"));
-			Assert.That(actual.ParamName,      Is.EqualTo(source));
+			Assert.That(actual.Data,            Is.Empty, $"{nameof(ArgumentException)}#{nameof(ArgumentException.Data)}");
+			Assert.That(actual.HelpLink,        Is.Null,  $"{nameof(ArgumentException)}#{nameof(ArgumentException.HelpLink)}");
+			Assert.That(actual.HResult,         Is.EqualTo(-2147467261));
+			Assert.That(actual.InnerException,  Is.Null);
+			Assert.That(actual.Message,         Is.EqualTo($"Value cannot be null. (Parameter '{source}')"));
+			Assert.That(actual.Source,          Is.EqualTo("Occhitta.Libraries.Struct"));
+			Assert.That($"{actual.TargetSite}", Is.EqualTo("Void .ctor(System.Collections.Generic.IEnumerable`1[System.String])"));
+			Assert.That(actual.ParamName,       Is.EqualTo(source));
 		});
 	}
 	/// <summary>
