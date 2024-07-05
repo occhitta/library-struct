@@ -4,7 +4,7 @@ namespace Occhitta.Libraries.Struct.Dsv;
 /// DSV形式要素情報インターフェースです。
 /// <para>DSV情報の一行情報を保持するします。</para>
 /// </summary>
-public interface DsvSourceData : IReadOnlyList<string> {
+public interface DsvSourceData<TValue> : IReadOnlyList<TValue> {
 	#region 継承メソッド定義
 	/// <summary>
 	/// 反復処理を取得します。

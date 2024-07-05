@@ -4,7 +4,7 @@ namespace Occhitta.Libraries.Struct.Dsv;
 /// DSV形式取込情報クラスです。
 /// <para>当該情報は不変情報となります。</para>
 /// </summary>
-public sealed class DsvImportData : DsvSourceData, IEquatable<DsvImportData> {
+public sealed class DsvImportData : DsvSourceData<string>, IEquatable<DsvImportData> {
 	#region メンバー変数定義
 	/// <summary>
 	/// 項目配列
