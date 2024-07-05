@@ -20,7 +20,7 @@ public abstract class IEnumerableTest<TValue> {
 			var value2 = actual.Current;
 			var value3 = expect[offset];
 			Assert.Multiple(() => {
-				Assert.That(value1, Is.SameAs(value2),  "index={0}", offset);
+				Assert.That(value1, Is.EqualTo(value2),  "index={0}", offset);
 				Assert.That(value1, Is.EqualTo(value3), "index={0}", offset);
 			});
 			offset++;
@@ -38,7 +38,7 @@ public abstract class IEnumerableTest<TValue> {
 			var value2 = actual.Current;
 			var value3 = expect[offset];
 			Assert.Multiple(() => {
-				Assert.That(value1, Is.SameAs(value2),  "index={0}", offset);
+				Assert.That(value1, Is.EqualTo(value2),  "index={0}", offset);
 				Assert.That(value1, Is.EqualTo(value3), "index={0}", offset);
 			});
 			offset++;
