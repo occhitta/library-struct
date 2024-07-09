@@ -56,7 +56,32 @@ public class StructException : SystemException {
 	/// <param name="region">部分情報</param>
 	/// <param name="offset">起点番号</param>
 	/// <param name="length">要素個数</param>
+	/// <param name="source">関連例外</param>
+	public StructException(string reason, string region, int offset , int length, Exception source) : base(ToText(reason, region, offset, length), source) {
+		Reason = reason;
+		Region = region;
+		Offset = offset;
+		Length = length;
+	}
+	/// <summary>
+	/// 構造例外を生成します。
+	/// </summary>
+	/// <param name="reason">基本内容</param>
+	/// <param name="region">部分情報</param>
+	/// <param name="offset">起点番号</param>
+	/// <param name="length">要素個数</param>
 	public StructException(string reason, ReadOnlySpan<char> region, int offset, int length) : this(reason, region.ToString(), offset, length) {
+		// 処理なし
+	}
+	/// <summary>
+	/// 構造例外を生成します。
+	/// </summary>
+	/// <param name="reason">基本内容</param>
+	/// <param name="region">部分情報</param>
+	/// <param name="offset">起点番号</param>
+	/// <param name="length">要素個数</param>
+	/// <param name="source">関連例外</param>
+	public StructException(string reason, ReadOnlySpan<char> region, int offset, int length, Exception source) : this(reason, region.ToString(), offset, length, source) {
 		// 処理なし
 	}
 	#endregion 生成メソッド定義
