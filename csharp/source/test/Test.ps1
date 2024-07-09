@@ -4,15 +4,17 @@
 # 変数定義
 $invokeTime = Get-Date
 $outputDate = $invokeTime.ToString("yyyyMMdd")
+$outputPath = "bin/Result/$outputDate"
+$reportFile = "$outputPath/cobertura.xml"
 
-Write-Host 出力ファイル：bin/Result/$outputDate/cobertura.xml
+Write-Host 出力ファイル：$reportFile
 
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=bin/Result/$outputDate/cobertura.xml
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$reportFile
 if ($?) {
 	# 検証成功
-	reportgenerator -reports:bin/Result/$outputDate/cobertura.xml -targetdir:bin/Result/$outputDate -reporttypes:Html
+	reportgenerator -reports:$reportFile -targetdir:$outputPath -reporttypes:Html
 	if ($?) {
 		# 生成成功
-		Start-Process bin/Result/$outputDate/index.html
+		Start-Process $outputPath/index.html
 	}
 }
