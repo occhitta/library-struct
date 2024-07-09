@@ -6,6 +6,7 @@ namespace Occhitta.Libraries.Common.UnitTest;
 /// <summary>
 /// <see cref="Exception" />検証クラスです。
 /// </summary>
+[Obsolete("Occhitta.Libraries.Testerライブラリに変更")]
 public static class ExceptionTest {
 	#region 内部メソッド定義:ToIndent
 	/// <summary>

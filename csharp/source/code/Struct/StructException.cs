@@ -6,24 +6,31 @@ namespace Occhitta.Libraries.Struct;
 public class StructException : SystemException {
 	#region プロパティー定義
 	/// <summary>
+	/// 基本内容を取得します。
+	/// </summary>
+	/// <value>基本内容</value>
+	public string Reason {
+		get;
+	}
+	/// <summary>
 	/// 部分情報を取得します。
 	/// </summary>
 	/// <value>部分情報</value>
-	public object Range {
+	public object Region {
 		get;
 	}
 	/// <summary>
 	/// 起点番号を取得します。
 	/// </summary>
 	/// <value>起点番号</value>
-	public int Index {
+	public int Offset {
 		get;
 	}
 	/// <summary>
 	/// 要素個数を取得します。
 	/// </summary>
 	/// <value>要素個数</value>
-	public int Count {
+	public int Length {
 		get;
 	}
 	#endregion プロパティー定義
@@ -37,9 +44,10 @@ public class StructException : SystemException {
 	/// <param name="offset">起点番号</param>
 	/// <param name="length">要素個数</param>
 	public StructException(string reason, string region, int offset , int length) : base(ToText(reason, region, offset, length)) {
-		Range = region;
-		Index = offset;
-		Count = length;
+		Reason = reason;
+		Region = region;
+		Offset = offset;
+		Length = length;
 	}
 	/// <summary>
 	/// 構造例外を生成します。
@@ -65,7 +73,7 @@ public class StructException : SystemException {
 	private static string ToText(string reason, string region, int offset, int length) {
 		var value1 = new String(' ', offset);
 		var value2 = new String('^', length);
-		return $"{reason}{Environment.NewLine}Index : {offset}{Environment.NewLine}Count : {length}{Environment.NewLine}Range : {region}{Environment.NewLine}      : {value1}{value2}";
+		return $"{reason}{Environment.NewLine}Offset : {offset}{Environment.NewLine}Length : {length}{Environment.NewLine}Region : {region}{Environment.NewLine}       : {value1}{value2}";
 	}
 	#endregion 内部メソッド定義
 }
