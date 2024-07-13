@@ -40,6 +40,13 @@ public sealed class DsvParserData<TValue> : DsvSourceData<TValue> {
 			this.source = [..source];
 		}
 	}
+	/// <summary>
+	/// DSV形式解析情報を生成します。
+	/// </summary>
+	/// <param name="source">項目集合</param>
+	/// <exception cref="ArgumentNullException"><paramref name="source" />自体が<c>Null</c>となっている場合</exception>
+	internal static DsvParserData<TValue> Create(IEnumerable<TValue> source) =>
+		new(source);
 	#endregion 生成メソッド定義
 
 	#region 内部メソッド定義:ToString

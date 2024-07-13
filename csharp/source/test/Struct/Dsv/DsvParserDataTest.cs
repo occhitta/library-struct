@@ -79,8 +79,18 @@ System.ArgumentNullException {
 		[TestCase(      ExpectedResult = "[]")]
 		[TestCase(1,    ExpectedResult = "[\"1\"]")]
 		[TestCase(1, 2, ExpectedResult = "[\"1\",\"2\"]")]
-		public string SuccessCode(params int[] source) =>
+		public string SuccessList(params int[] source) =>
 			SuccessCode(new DsvParserData<int>(source), source);
+		/// <summary>
+		/// 正常処理を検証します。
+		/// </summary>
+		/// <param name="source">項目配列</param>
+		/// <returns>表現文字列</returns>
+		[TestCase(      ExpectedResult = "[]")]
+		[TestCase(1,    ExpectedResult = "[\"1\"]")]
+		[TestCase(1, 2, ExpectedResult = "[\"1\",\"2\"]")]
+		public string SuccessCode(params int[] source) =>
+			SuccessCode(DsvParserData<int>.Create(source), source);
 	}
 	#endregion 検証メソッド定義:InstanceInt4Test
 
@@ -101,8 +111,19 @@ System.ArgumentNullException {
 		[TestCase("",         ExpectedResult = "[\"\"]"         )]
 		[TestCase("AA", "BB", ExpectedResult = "[\"AA\",\"BB\"]")]
 		[TestCase("AA", null, ExpectedResult = "[\"AA\",\"\"]"  )]
-		public string SuccessCode(params string[] source) =>
+		public string SuccessList(params string[] source) =>
 			SuccessCode(new DsvParserData<string>(source), source);
+		/// <summary>
+		/// 正常処理を検証します。
+		/// </summary>
+		/// <param name="source">項目配列</param>
+		/// <returns>表現文字列</returns>
+		[TestCase(            ExpectedResult = "[]"             )]
+		[TestCase("",         ExpectedResult = "[\"\"]"         )]
+		[TestCase("AA", "BB", ExpectedResult = "[\"AA\",\"BB\"]")]
+		[TestCase("AA", null, ExpectedResult = "[\"AA\",\"\"]"  )]
+		public string SuccessCode(params string[] source) =>
+			SuccessCode(DsvParserData<string>.Create(source), source);
 	}
 	#endregion 検証メソッド定義:InstanceTextTest
 	#endregion 検証メソッド定義:Instance～Test
