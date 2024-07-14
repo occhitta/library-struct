@@ -30,16 +30,17 @@ public class FixedBinaryDataTest {
 	/// <param name="param4">引数情報</param>
 	/// <returns>例外内容</returns>
 	private static string ToText(string param1, string param2, string param3, string param4) => $@"System.ArgumentOutOfRangeException {{
-  Message : ""Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index'){param1}""
-  ActualValue : {param2}
-  ParamName : ""index""
-  TargetSite : {param3}
-  Data : {{  }}
-  InnerException : Null
-  HelpLink : Null
-  Source : ""{param4}""
-  HResult : -2146233086
-  StackTrace : ...
+	Message : ""Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index'){param1}""
+	ActualValue : {param2}
+	ParamName : ""index""
+	TargetSite : {param3}
+	Data : {{
+	}}
+	InnerException : Null
+	HelpLink : Null
+	Source : ""{param4}""
+	HResult : -2146233086
+	StackTrace : ...
 }}";
 	/// <summary>
 	/// 例外内容へ変換します。
@@ -85,10 +86,10 @@ public class FixedBinaryDataTest {
 	private static void FailureCode(IReadOnlyList<byte> source, int offset, bool mscode) {
 		static byte Invoke(IReadOnlyList<byte> source, int offset) => source[offset];
 		var cache1 = mscode? (int?)null: offset;
-		var cache2 = mscode? "Void ThrowArgumentOutOfRange_IndexMustBeLessException()": "Byte GetData(Int32)";
+		var cache2 = mscode? "(System.Reflection.RuntimeMethodInfo)Void ThrowArgumentOutOfRange_IndexMustBeLessException()": "(System.Reflection.RuntimeMethodInfo)Byte GetData(Int32)";
 		var cache3 = mscode? "System.Private.CoreLib": "Occhitta.Libraries.Struct";
 		var actual = Assert.Throws<ArgumentOutOfRangeException>(() => Invoke(source, offset));
-		Assert.That(ExceptionTest.ToString(actual), Is.EqualTo(ToText(cache1, cache2, cache3)));
+		Assert.That(ExceptionUtilities.ToString(actual, "\t"), Is.EqualTo(ToText(cache1, cache2, cache3)));
 	}
 	/// <summary>
 	/// 異常処理を検証します。
