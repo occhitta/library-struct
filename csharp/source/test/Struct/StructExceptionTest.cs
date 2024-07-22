@@ -1,5 +1,3 @@
-using Occhitta.Libraries.Common;
-
 namespace Occhitta.Libraries.Struct;
 
 /// <summary>

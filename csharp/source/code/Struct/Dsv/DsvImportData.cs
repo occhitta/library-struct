@@ -1,5 +1,3 @@
-using Occhitta.Libraries.Stream;
-
 namespace Occhitta.Libraries.Struct.Dsv;
 
 /// <summary>

@@ -1,5 +1,3 @@
-using System.Text;
-
 namespace Occhitta.Libraries.Struct.Dsv;
 
 /// <summary>
@@ -22,7 +20,7 @@ internal sealed class DsvDecodeData<TParse, TStore>(DsvParserCode<TParse> parser
 	/// <summary>区切文字</summary>
 	private char markerCode = markerCode;
 	/// <summary>保留情報(項目情報)</summary>
-	private StringBuilder? bufferData = new();
+	private System.Text.StringBuilder? bufferData = new();
 	/// <summary>項目一覧</summary>
 	private List<TParse>? exportList = [];
 	/// <summary>要素番号</summary>
@@ -59,7 +57,7 @@ internal sealed class DsvDecodeData<TParse, TStore>(DsvParserCode<TParse> parser
 	/// </summary>
 	/// <value>保留情報</value>
 	/// <exception cref="ObjectDisposedException">当該情報が破棄された場合</exception>
-	private StringBuilder BufferData => this.bufferData ?? throw new ObjectDisposedException(GetType().FullName);
+	private System.Text.StringBuilder BufferData => this.bufferData ?? throw new ObjectDisposedException(GetType().FullName);
 	/// <summary>
 	/// 項目一覧を取得します。
 	/// </summary>
@@ -143,7 +141,7 @@ internal sealed class DsvDecodeData<TParse, TStore>(DsvParserCode<TParse> parser
 	/// <param name="record">要素番号</param>
 	/// <returns>項目情報</returns>
 	/// <exception cref="StructException">項目情報の復号に失敗した場合</exception>
-	private TParse DecodeItem(DsvParserCode<TParse> parser, StringBuilder buffer, int column, int record) {
+	private TParse DecodeItem(DsvParserCode<TParse> parser, System.Text.StringBuilder buffer, int column, int record) {
 		try {
 			var choose = buffer.ToString();
 			if (StringFlag) {
@@ -182,7 +180,7 @@ internal sealed class DsvDecodeData<TParse, TStore>(DsvParserCode<TParse> parser
 	/// <param name="result">要素情報</param>
 	/// <returns>要素情報の構築が完了した場合、<c>True</c>を返却</returns>
 	/// <exception cref="StructException">項目情報の復号に失敗した場合</exception>
-	private bool DecodeData(DsvResultCode<TParse, TStore> export, List<TParse> record, DsvParserCode<TParse> parser, StringBuilder buffer, char source, [MaybeNullWhen(false)]out TStore result) {
+	private bool DecodeData(DsvResultCode<TParse, TStore> export, List<TParse> record, DsvParserCode<TParse> parser, System.Text.StringBuilder buffer, char source, [MaybeNullWhen(false)]out TStore result) {
 		if (source == EscapeCode) {
 			// 制御文字の場合：要素追加＋状態反転
 			StringFlag = !StringFlag;
@@ -230,7 +228,7 @@ internal sealed class DsvDecodeData<TParse, TStore>(DsvParserCode<TParse> parser
 	/// <param name="result">要素情報</param>
 	/// <returns>要素情報の構築が完了した場合、<c>True</c>を返却</returns>
 	/// <exception cref="StructException">項目情報の復号に失敗した場合</exception>
-	private bool DecodeData(DsvResultCode<TParse, TStore> export, List<TParse> record, DsvParserCode<TParse> parser, StringBuilder buffer, [MaybeNullWhen(false)]out TStore result) {
+	private bool DecodeData(DsvResultCode<TParse, TStore> export, List<TParse> record, DsvParserCode<TParse> parser, System.Text.StringBuilder buffer, [MaybeNullWhen(false)]out TStore result) {
 		if (record.Count <= 0 && buffer.Length <= 0) {
 			// 保持情報なし
 			result = default;

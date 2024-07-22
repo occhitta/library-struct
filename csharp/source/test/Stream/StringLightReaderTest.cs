@@ -1,6 +1,3 @@
-using System.Text.RegularExpressions;
-using Occhitta.Libraries.Common;
-
 namespace Occhitta.Libraries.Stream;
 
 /// <summary>
@@ -81,8 +78,8 @@ System.ObjectDisposedException {
 	/// 正規表現を取得します。
 	/// </summary>
 	/// <returns>正規表現</returns>
-	[GeneratedRegex(@"\$\{(Template|Argument)\:([A-Za-z]+)\}")]
-	private static partial Regex CreateCode();
+	[System.Text.RegularExpressions.GeneratedRegex(@"\$\{(Template|Argument)\:([A-Za-z]+)\}")]
+	private static partial System.Text.RegularExpressions.Regex CreateCode();
 	/// <summary>
 	/// 要素名称を置換します。
 	/// </summary>
@@ -94,7 +91,7 @@ System.ObjectDisposedException {
 	/// </summary>
 	/// <param name="source">要素情報</param>
 	/// <returns>置換内容</returns>
-	private string UpdateName(Match source) {
+	private string UpdateName(System.Text.RegularExpressions.Match source) {
 		var cache1 = source.Groups[1];
 		var cache2 = source.Groups[2];
 		return cache1.Value switch {

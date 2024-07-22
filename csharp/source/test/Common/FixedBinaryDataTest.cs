@@ -1,4 +1,3 @@
-using System.Globalization;
 using Occhitta.Libraries.Common.UnitTest;
 
 namespace Occhitta.Libraries.Common;
