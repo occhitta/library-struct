@@ -1,4 +1,5 @@
 using Occhitta.Libraries.Common.UnitTest;
+using Occhitta.Libraries.Stream.String;
 
 namespace Occhitta.Libraries.Struct.Dsv;
 
@@ -8,6 +9,15 @@ namespace Occhitta.Libraries.Struct.Dsv;
 /// </summary>
 [TestFixture]
 public sealed class DsvImportDataTest {
+	#region 内部メソッド定義:ConvertCode
+	/// <summary>
+	/// 要素情報を変換します。
+	/// </summary>
+	/// <param name="source">要素情報</param>
+	/// <returns>変換情報</returns>
+	private static string ConvertCode(string source, int column, int record) => $"[{column}, {record}]{source}";
+	#endregion 内部メソッド定義:ConvertCode
+
 	#region 検証メソッド定義:SuccessCode
 	/// <summary>
 	/// 正常処理を検証します。
@@ -26,6 +36,22 @@ public sealed class DsvImportDataTest {
 				Assert.That(actual[index], Is.EqualTo(source[index]), "要素情報が異なります(要素番号={0})", index);
 			}
 		});
+	}
+	/// <summary>
+	/// 正常処理を検証します。
+	/// </summary>
+	/// <param name="source">読込内容</param>
+	/// <param name="escape">制御文字</param>
+	/// <param name="marker">区切文字</param>
+	[TestCase("",            '"', ',', ExpectedResult = "")]
+	[TestCase(",",           '"', ',', ExpectedResult = "[\"[0, 0]\",\"[1, 0]\"]")]
+	[TestCase("A,B",         '"', ',', ExpectedResult = "[\"[0, 0]A\",\"[1, 0]B\"]")]
+	[TestCase("\"A\",B",     '"', ',', ExpectedResult = "[\"[0, 0]\"\"A\"\"\",\"[1, 0]B\"]")]
+	[TestCase("\"A\",B\r\n", '"', ',', ExpectedResult = "[\"[0, 0]\"\"A\"\"\",\"[1, 0]B\"]")]
+	[TestCase("A,B\r\nC,D",  '"', ',', ExpectedResult = "[\"[0, 0]A\",\"[1, 0]B\"]#[\"[0, 1]C\",\"[1, 1]D\"]")]
+	public string SuccessCode(string source, char escape, char marker) {
+		using var reader = new SimpleStringLightReader(source);
+		return String.Join("#", DsvImportData.DecodeData(reader, escape, marker, ConvertCode));
 	}
 	#endregion 検証メソッド定義:SuccessCode
 
@@ -67,7 +93,7 @@ public sealed class DsvImportDataTest {
 
 	#region 検証メソッド定義:DsvSourceData
 	/// <summary>
-	/// <see cref="DsvSourceData" />を検証します。
+	/// <see cref="DsvSourceData" />検証クラスです。
 	/// </summary>
 	[TestFixture]
 	public sealed class SourceTest : IEnumerableTest<string> {
@@ -87,7 +113,7 @@ public sealed class DsvImportDataTest {
 
 	#region 検証メソッド定義:Object継承
 	/// <summary>
-	/// <see cref="Object" />継承検証クラスです。
+	/// <see cref="Object" />検証クラスです。
 	/// </summary>
 	[TestFixture]
 	public sealed class ObjectTest {

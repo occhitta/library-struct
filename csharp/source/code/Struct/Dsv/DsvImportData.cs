@@ -1,3 +1,5 @@
+using Occhitta.Libraries.Stream;
+
 namespace Occhitta.Libraries.Struct.Dsv;
 
 /// <summary>
@@ -46,6 +48,38 @@ public sealed class DsvImportData : DsvSourceData<string>, IEquatable<DsvImportD
 			for (var index = 0; index < this.source.Length; index ++) {
 				if (this.source[index] == null) throw new ArgumentNullException($"{nameof(source)}[{index}]");
 			}
+		}
+	}
+	/// <summary>
+	/// DSV形式取込情報を生成します。
+	/// </summary>
+	/// <param name="source">項目集合</param>
+	/// <returns>DSV形式取込情報</returns>
+	/// <exception cref="ArgumentNullException"><paramref name="source" />自体が<c>Null</c>となっている場合</exception>
+	/// <exception cref="ArgumentNullException"><paramref name="source" />要素が<c>Null</c>となっている場合</exception>
+	private static DsvImportData CreateData(IEnumerable<string> source) =>
+		new(source);
+	/// <summary>
+	/// DSV形式取込情報を生成します。
+	/// </summary>
+	/// <param name="reader">読込処理</param>
+	/// <param name="escape">制御文字</param>
+	/// <param name="marker">区切文字</param>
+	/// <param name="parser">解析処理</param>
+	/// <returns>DSV形式取込集合</returns>
+	/// <exception cref="StructException">復号処理に失敗した場合</exception>
+	public static IEnumerable<DsvImportData> DecodeData(StringLightReader reader, char escape, char marker, DsvParserCode<string> parser) {
+		using var source = new DsvDecodeData<string, DsvImportData>(parser, CreateData, escape, marker);
+		while (true) {
+			var choose = reader.Read();
+			if (choose < 0) {
+				break;
+			} else if (source.ImportData((char)choose, out var record)) {
+				yield return record;
+			}
+		}
+		if (source.FinishData(out var finish)) {
+			yield return finish;
 		}
 	}
 	#endregion 生成メソッド定義
